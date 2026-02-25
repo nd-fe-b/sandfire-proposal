@@ -587,6 +587,31 @@
 </style>
 </head>
 <body>
+<div id="gate" style="display:flex;align-items:center;justify-content:center;min-height:100vh;background:#1a1a2e;">
+  <form onsubmit="return unlock()" style="text-align:center;font-family:SwedenSans,-apple-system,sans-serif;">
+    <img src="assets/img/AR_brand_light.png" alt="AlfaRev" style="width:120px;margin-bottom:40px;opacity:0.9;">
+    <div>
+      <input id="pw" type="password" placeholder="Enter password" autocomplete="off"
+        style="font-size:16px;padding:12px 20px;border:1px solid rgba(255,255,255,0.2);border-radius:6px;background:rgba(255,255,255,0.05);color:#fff;outline:none;width:220px;font-family:inherit;">
+      <button type="submit"
+        style="font-size:16px;padding:12px 24px;margin-left:8px;border:none;border-radius:6px;background:#6c49b6;color:#fff;cursor:pointer;font-family:inherit;">Open</button>
+    </div>
+    <p id="err" style="color:#e74c3c;margin-top:12px;font-size:13px;opacity:0;">&nbsp;</p>
+  </form>
+</div>
+<script>
+function unlock(){
+  if(document.getElementById('pw').value==='Perth'){
+    document.getElementById('gate').remove();
+    document.getElementById('content').style.display='block';
+    return false;
+  }
+  document.getElementById('err').style.opacity='1';
+  document.getElementById('err').textContent='Incorrect password';
+  return false;
+}
+</script>
+<div id="content" style="display:none;">
 <div class="document">
 
   <!-- ════════════════ COVER ════════════════ -->
@@ -1226,5 +1251,6 @@ function exportChart(canvasId, filename) {
   link.click();
 }
 </script>
+</div><!-- /content -->
 </body>
 </html>
