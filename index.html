@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlfaRev — Partner Program Proposal for Sandfire Resources</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<style>
+  @font-face {
+    font-family: 'SwedenSans';
+    src: url('assets/fonts/SwedenSansBold.woff2') format('woff2');
+    font-weight: 700;
+  }
+  @font-face {
+    font-family: 'SwedenSans';
+    src: url('assets/fonts/SwedenSansSemiBold.woff2') format('woff2');
+    font-weight: 600;
+  }
+  @font-face {
+    font-family: 'SwedenSans';
+    src: url('assets/fonts/SwedenSansRegular.woff2') format('woff2');
+    font-weight: 400;
+  }
+  @font-face {
+    font-family: 'SwedenSans';
+    src: url('assets/fonts/SwedenSansBook.woff2') format('woff2');
+    font-weight: 300;
+  }
+
+  :root {
+    --brand: #6c49b6;
+    --brand-light: #8b6dd4;
+    --text-primary: hsla(214,70%,4%,0.82);
+    --text-secondary: hsla(0,0%,2%,0.55);
+    --bg: #ffffff;
+    --bg-muted: #fafafa;
+    --border: rgba(0,0,0,0.08);
+    --green: #16a34a;
+    --red: #dc2626;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  @media print {
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .page-break { page-break-before: always; }
+    .no-print { display: none !important; }
+  }
+
+  body {
+    font-family: 'SwedenSans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    color: var(--text-primary);
+    background: var(--bg);
+    line-height: 1.6;
+    font-size: 15px;
+    font-weight: 400;
+  }
+
+  .document {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  /* ── Cover ── */
+  .cover {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px;
+    background: linear-gradient(160deg, #0d0d12 0%, #1a1730 40%, #2a1f50 100%);
+    color: #fff;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(108,73,182,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cover .accent-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--brand);
+  }
+
+  .cover .logo { width: 140px; margin-bottom: 60px; opacity: 0.9; }
+
+  .cover h1 {
+    font-size: 42px; font-weight: 700;
+    letter-spacing: 1px; line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  .cover .subtitle {
+    font-size: 20px; font-weight: 300;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 48px;
+  }
+
+  .cover .meta-block { display: flex; gap: 60px; margin-top: 20px; }
+
+  .cover .meta-item {
+    font-size: 13px; font-weight: 300;
+    color: rgba(255,255,255,0.45);
+    text-transform: uppercase; letter-spacing: 2px;
+  }
+
+  .cover .meta-value {
+    font-size: 15px; font-weight: 400;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 0; text-transform: none;
+    margin-top: 6px;
+  }
+
+  .cover .fox {
+    position: absolute;
+    bottom: 40px; right: 60px;
+    width: 48px; opacity: 0.3;
+  }
+
+  .cover .sender-block {
+    position: absolute;
+    bottom: 48px; left: 80px;
+    display: flex; gap: 48px;
+  }
+
+  .cover .sender-col {
+    font-size: 12px; font-weight: 300;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.7;
+  }
+
+  .cover .sender-col strong {
+    font-weight: 400;
+    color: rgba(255,255,255,0.7);
+  }
+
+  /* ── Content pages ── */
+  .page { padding: 64px 80px; }
+
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+    border-bottom: 2px solid var(--text-primary);
+  }
+
+  .page-header .logo-small { height: 28px; opacity: 0.5; }
+
+  .page-header .page-label {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
+  h2 {
+    font-size: 28px; font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+  }
+
+  h2 .num { color: var(--brand); margin-right: 8px; }
+
+  h3 {
+    font-size: 18px; font-weight: 600;
+    margin-top: 32px; margin-bottom: 12px;
+    color: var(--text-primary);
+  }
+
+  h4 {
+    font-size: 14px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 2px;
+    color: var(--brand);
+    margin-top: 28px; margin-bottom: 10px;
+  }
+
+  p { margin-bottom: 16px; color: var(--text-primary); }
+
+  .lead {
+    font-size: 17px; font-weight: 300;
+    color: var(--text-secondary);
+    margin-bottom: 24px; line-height: 1.7;
+  }
+
+  ul { list-style: none; margin-bottom: 16px; padding-left: 0; }
+
+  ul li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 8px;
+  }
+
+  ul li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 9px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--brand);
+  }
+
+  .divider {
+    width: 100%; height: 1px;
+    background: var(--border);
+    margin: 36px 0;
+  }
+
+  .highlight-box {
+    background: var(--bg-muted);
+    border-left: 3px solid var(--brand);
+    padding: 20px 24px;
+    margin: 24px 0;
+    border-radius: 0 6px 6px 0;
+  }
+
+  .highlight-box p { margin-bottom: 0; font-size: 14px; }
+
+  /* ── Tables ── */
+  table.simple {
+    width: 100%; border-collapse: collapse;
+    margin: 16px 0; font-size: 14px;
+  }
+
+  table.simple th {
+    text-align: left; font-weight: 600;
+    padding: 10px 16px;
+    border-bottom: 2px solid var(--text-primary);
+    font-size: 11px; text-transform: uppercase;
+    letter-spacing: 2px; color: var(--text-secondary);
+  }
+
+  table.simple td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  table.simple tr:last-child td { border-bottom: none; }
+
+  table.compare-table { margin: 12px 0 24px; }
+  table.compare-table td,
+  table.compare-table th { font-size: 13px; vertical-align: top; }
+  table.compare-table th { font-size: 12px; padding-bottom: 12px; }
+  table.compare-table th:nth-child(2) { color: var(--text-secondary); }
+  table.compare-table th:nth-child(3) { color: var(--brand); }
+
+  /* Section separators within compare table */
+  table.compare-table tr.section-head td {
+    border-bottom: none;
+    padding-top: 20px;
+    padding-bottom: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-secondary);
+  }
+
+  /* Bottom-line row (the punchline) */
+  table.compare-table tr.bottom-line td {
+    border-top: 2px solid var(--text-primary);
+    border-bottom: none;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    background: var(--bg-muted);
+  }
+
+  /* Cost rows - right-align values */
+  table.compare-table .cost-val {
+    font-size: 18px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  table.simple .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  table.simple .highlight { color: var(--green); font-weight: 600; }
+  table.simple .muted { color: var(--text-secondary); }
+
+  /* ── Pricing card ── */
+  .pricing-card {
+    background: linear-gradient(160deg, #0d0d12, #1a1730);
+    border-radius: 12px;
+    padding: 40px;
+    color: #fff;
+    margin: 28px 0;
+  }
+
+  .pricing-card .price-label {
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 8px;
+  }
+
+  .pricing-card .price {
+    font-size: 36px; font-weight: 700;
+    color: #fff; margin-bottom: 4px;
+  }
+
+  .pricing-card .price-unit {
+    font-size: 14px; font-weight: 300;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 24px;
+  }
+
+  .pricing-card .price-detail {
+    font-size: 14px; font-weight: 400;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+  }
+
+  /* ── Comparison cards ── */
+  .compare-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 20px 0;
+  }
+
+  .compare-card {
+    padding: 24px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+
+  .compare-card.competitor {
+    background: rgba(220, 38, 38, 0.03);
+    border-color: rgba(220, 38, 38, 0.15);
+  }
+
+  .compare-card.us {
+    background: rgba(108, 73, 182, 0.04);
+    border-color: rgba(108, 73, 182, 0.2);
+  }
+
+  .compare-card .compare-label {
+    font-size: 11px; text-transform: uppercase;
+    letter-spacing: 2px; color: var(--text-secondary);
+    margin-bottom: 6px;
+  }
+
+  .compare-card .compare-provider {
+    font-size: 18px; font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .compare-stat {
+    display: flex;
+    justify-content: space-between;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+
+  .compare-stat:last-child { border-bottom: none; }
+  .compare-stat .stat-label { color: var(--text-secondary); }
+  .compare-stat .stat-value { font-weight: 600; font-variant-numeric: tabular-nums; }
+
+  .savings-callout {
+    margin: 20px 0;
+    padding: 16px 24px;
+    background: rgba(22, 163, 74, 0.06);
+    border: 1px solid rgba(22, 163, 74, 0.15);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .savings-callout .savings-value {
+    font-size: 22px; font-weight: 700;
+    color: var(--green);
+  }
+
+  .savings-callout .savings-label {
+    font-size: 14px; color: var(--text-secondary);
+    margin-top: 2px;
+  }
+
+  /* ── Payment timeline ── */
+  .payment-timeline {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    margin: 24px 0;
+    position: relative;
+  }
+
+  .payment-timeline::before {
+    content: '';
+    position: absolute;
+    top: 20px; left: 10%; right: 10%;
+    height: 2px;
+    background: var(--border);
+  }
+
+  .payment-step {
+    flex: 1;
+    text-align: center;
+    position: relative;
+  }
+
+  .payment-step .dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--brand);
+    margin: 14px auto 10px;
+    position: relative; z-index: 1;
+  }
+
+  .payment-step .dot.large {
+    width: 18px; height: 18px;
+    margin: 11px auto 7px;
+  }
+
+  .payment-step .dot.alt { background: var(--brand-light); }
+
+  .payment-step .step-label {
+    font-size: 11px; color: var(--text-secondary);
+    letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .payment-step .step-amount {
+    font-size: 16px; font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .payment-step .step-detail {
+    font-size: 12px; color: var(--text-secondary);
+    margin-top: 2px;
+  }
+
+  /* ── Charts ── */
+  .chart-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    margin: 16px 0;
+  }
+
+  .chart-container.tall { height: 360px; }
+
+  /* ── Why chain ── */
+  .why-chain {
+    margin: 16px 0;
+  }
+
+  .why-item {
+    padding: 12px 20px;
+    margin-bottom: 8px;
+    background: var(--bg-muted);
+    border-radius: 8px;
+    font-size: 14px;
+    position: relative;
+    padding-left: 40px;
+  }
+
+  .why-item::before {
+    content: 'Why?';
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--brand);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .why-item:first-child::before { content: ''; }
+  .why-item:first-child { padding-left: 20px; font-weight: 600; }
+
+  /* ── Three-col features ── */
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+
+  .feature-card {
+    padding: 20px;
+    background: var(--bg-muted);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .feature-card .feature-icon {
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+
+  .feature-card .feature-title {
+    font-size: 14px; font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .feature-card .feature-desc {
+    font-size: 12px; color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  /* ── Footer ── */
+  .page-footer {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+  }
+
+  .confidential {
+    font-size: 11px; font-weight: 400;
+    color: var(--text-secondary);
+    letter-spacing: 1px; text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  .footnote {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 12px;
+    line-height: 1.5;
+  }
+
+  /* ── Inline diagrams ── */
+  .diagram {
+    width: 100%;
+    margin: 24px 0;
+    border-radius: 8px;
+  }
+
+  /* ── Export buttons (screen only) ── */
+  .export-btn {
+    position: absolute;
+    top: 8px; right: 8px;
+    background: var(--brand);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s;
+    z-index: 10;
+  }
+
+  .chart-wrapper:hover .export-btn { opacity: 1; }
+
+  .chart-wrapper {
+    position: relative;
+  }
+
+  @media print {
+    .export-btn { display: none; }
+  }
+
+  /* Q&A page — compact */
+  .qa h3 { font-size: 14px; margin-top: 18px; margin-bottom: 6px; }
+  .qa p { font-size: 12.5px; margin-bottom: 10px; line-height: 1.5; }
+  .qa h2 { margin-bottom: 12px; }
+</style>
+</head>
+<body>
+<div class="document">
+
+  <!-- ════════════════ COVER ════════════════ -->
+  <div class="cover">
+    <div class="accent-bar"></div>
+    <img class="logo" src="assets/img/AR_brand_light.png" alt="AlfaRev">
+    <h1>Partner Program<br>Proposal</h1>
+    <p class="subtitle">Mining Intelligence — Asset Data Platform</p>
+
+    <div class="meta-block">
+      <div>
+        <div class="meta-item">Date</div>
+        <div class="meta-value">25 February 2026</div>
+      </div>
+      <div>
+        <div class="meta-item">Prepared for</div>
+        <div class="meta-value">Sandfire Resources Limited</div>
+      </div>
+      <div>
+        <div class="meta-item">Classification</div>
+        <div class="meta-value">Confidential</div>
+      </div>
+    </div>
+
+    <div class="sender-block">
+      <div class="sender-col">
+        <strong>Claypond AS ("AlfaRev")</strong><br>
+        Krebs' gate 11<br>
+        0478 Oslo, Norway
+      </div>
+      <div class="sender-col">
+        <strong>Johannes Hold&oslash;</strong><br>
+        johannes.holdo@alfa-rev.com<br>
+        +47 411 33 705
+      </div>
+    </div>
+
+    <img class="fox" src="assets/img/AR_fox_light.png" alt="">
+  </div>
+
+  <!-- ════════════════ 1. THE CHALLENGE ════════════════ -->
+  <div class="page page-break">
+    <div class="page-header">
+      <img class="logo-small" src="assets/img/AR_fox_dark.png" alt="AlfaRev">
+      <span class="page-label">The Challenge</span>
+    </div>
+
+    <h2><span class="num">1.</span> The Challenge</h2>
+    <p class="lead">
+      Finding the needle in the haystack — across 10 to 100s of dense corporate reports per asset.
+    </p>
+
+    <p>Every copper property in your pipeline generates a trail of annual reports, quarterly releases, technical studies, and regulatory filings. The critical details — a revised recovery rate, a footnote redefining reserve categories, a guidance change buried in an operational review — are scattered across dense data tables and unstructured text. Each report contains 50+ tables, each table 50+ semantically unique values with specific context about the property, unit, time period, and process.</p>
+
+    <p>Data aggregators tried to solve this. They extract, standardise, and sell access. But standardisation breaks traceability — you cannot trace a value back to its source. Granular detail and footnotes are lost. Values go stale. The result: <em>"You cannot trust the data, so you go back to the source or call an analyst."</em></p>
+
+    <p>AI and LLMs offer a new path — but without deep context, they produce assumptions, not answers. An LLM cannot reliably extract and classify 250,000+ unique values into clean time series. It understands headlines, not data.</p>
+
+    <p><strong>The root cause is the same in both cases: the missing link between a reported value and its source.</strong></p>
+
+    <img class="diagram" src="assets/img/7.png" alt="The Challenge — extracting time series, document context, and searching the needle in the haystack">
+
+    <div class="page-footer">
+      <span>Claypond AS — Confidential</span>
+      <span>Page 1</span>
+    </div>
+  </div>
+
+  <!-- ════════════════ 2. HOW WE SOLVE IT ════════════════ -->
+  <div class="page page-break">
+    <div class="page-header">
+      <img class="logo-small" src="assets/img/AR_fox_dark.png" alt="AlfaRev">
+      <span class="page-label">Our Solution</span>
+    </div>
+
+    <h2><span class="num">2.</span> How We Solve It</h2>
+    <p class="lead">
+      The Source Value Key — the missing link between reported data and AI-powered answers.
+    </p>
+
+    <p>We build the <strong>Source Value Key</strong>: a unique identifier that ties every extracted value to its exact source — report, page, table, row, and context. It is the foundation that makes AI reasoning trustworthy and data fully traceable.</p>
+
+    <img class="diagram" src="assets/img/8.png" alt="How we solve it — data extraction, document hierarchy context, and LLM interface">
+
+    <h4>First-in-Class Data Extraction</h4>
+    <p>Tabular data is extracted using a deterministic, in-house algorithm — not an LLM. Every value is QC'ed and assigned a Source Value Key at the point of extraction. This is where traceability begins: each number carries its origin from day one.</p>
+
+    <h4>Document Hierarchy Context</h4>
+    <p>The Source Value Key doesn't stop at the table cell. Every paragraph, section header, and footnote is linked into the document hierarchy — so each value carries the full context of what it relates to. Nothing is lost in standardisation.</p>
+
+    <h4>Context Data &mdash; LLM Interface</h4>
+    <p>AlfaRev AI — our question-and-answer interface — reasons over data indexed by Source Value Key. When it answers a question, it cites the exact source — and distinguishes between fully keyed data (traceable) and uncontextualised data (use with caution). Built on the strongest reasoning models available today.</p>
+
+    <h4>Peer Comparison &mdash; Built In</h4>
+    <p>Because every value carries its Source Value Key, data across assets is contextualised and aligned at source — units, timescales, and reporting conventions are resolved before the data reaches you. That makes peer comparison native: compare revenue, reserves, production, or costs across assets by country, mining method, or commodity — without the manual work of exporting, cleaning, and aligning spreadsheets.</p>
+
+    <div class="highlight-box">
+      <p>The result: <strong>ask a question, get a sourced answer</strong> — with every value traceable via its Source Value Key back to the exact report, page, and table it came from. Compare one asset or twenty — the data is already aligned.</p>
+    </div>
+
+    <div class="page-footer">
+      <span>Claypond AS — Confidential</span>
+      <span>Page 2</span>
+    </div>
+  </div>
+
+  <!-- ════════════════ 5. DELIVERY ════════════════ -->
+  <div class="page page-break">
+    <div class="page-header">
+      <img class="logo-small" src="assets/img/AR_fox_dark.png" alt="AlfaRev">
+      <span class="page-label">Partner Program</span>
+    </div>
+
+    <h2><span class="num">3.</span> The Partner Program</h2>
+    <p class="lead">
+      Early adopters who shape the product they need — at favorable terms.
+    </p>
+
+    <p>Partners are not customers waiting for a finished product. They are early adopters who work alongside us to build a tool they could have developed themselves — if they had the time and resources. Partners provide direct feedback, test new features first, and influence the roadmap. In return, they get priority access and commercial terms that reflect the value of that collaboration.</p>
+
+    <h4>Data — Time Series</h4>
+    <ul>
+      <li>Revenue &amp; Costs (C1, gross, guidance)</li>
+      <li>Resources / Reserves (contained &amp; recoverable, by category)</li>
+      <li>Production (tonnes, grade, recovery)</li>
+    </ul>
+
+    <h4>Delivery Formats</h4>
+    <ul>
+      <li>Access to AlfaRev AI — ask questions, get sourced answers</li>
+      <li>Time-series data as CSV and JSON files</li>
+      <li>Source Inventory — full document reference for every data point</li>
+    </ul>
+
+    <h4>Partner Program Benefits</h4>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-title">You Choose the Assets</div>
+        <div class="feature-desc">Pick 20 assets at launch, ramp to 42 during Year 1. We deliver what you need, when you need it.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-title">2 Ingestions / Month</div>
+        <div class="feature-desc">Request 2 new asset ingestions per month — your priorities drive the roadmap.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-title">Unlimited Access</div>
+        <div class="feature-desc">Every dataset added to the platform during your subscription is included. No extra or hidden costs — as we scale, you benefit.</div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <p>The Partner Program is limited to <strong>3 partners</strong>. Each partner gets direct influence over the product roadmap and priority delivery of the assets they care about most.</p>
+    </div>
+
+    <h4>Service Agreement</h4>
+    <ul>
+      <li>Quarterly asset data updates</li>
+      <li>Monthly Partner calls — opportunity to continuously shape the product</li>
+      <li>Direct customer support</li>
+      <li>Enterprise license — unlimited users</li>
+    </ul>
+
+    <div class="page-footer">
+      <span>Claypond AS — Confidential</span>
+      <span>Page 3</span>
+    </div>
+  </div>
+
+  <!-- ════════════════ 6. COMPETITIVE BENCHMARK ════════════════ -->
+  <div class="page page-break">
+    <div class="page-header">
+      <img class="logo-small" src="assets/img/AR_fox_dark.png" alt="AlfaRev">
+      <span class="page-label">Benchmark</span>
+    </div>
+
+    <h2><span class="num">4.</span> Competitive Benchmark</h2>
+    <p class="lead">
+      A legacy database you query vs. an intelligent platform that answers.
+    </p>
+
+    <table class="simple compare-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Leading Aggregator</th>
+          <th>AlfaRev</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Scope -->
+        <tr>
+          <td><strong>Assets included</strong></td>
+          <td>~400 copper properties</td>
+          <td>42 properties of your choice after Year 1</td>
+        </tr>
+
+        <!-- Capabilities -->
+        <tr class="section-head"><td colspan="3">Capabilities</td></tr>
+        <tr>
+          <td><strong>Source traceability</strong></td>
+          <td><span style="color: var(--red); font-weight: 700;">No</span> — values disconnected from source</td>
+          <td><span style="color: var(--green); font-weight: 700;">Yes</span> — every value linked via Source Value Key</td>
+        </tr>
+        <tr>
+          <td><strong>AI reasoning</strong></td>
+          <td><span style="color: var(--red); font-weight: 700;">No</span> — query a database, call an analyst</td>
+          <td><span style="color: var(--green); font-weight: 700;">Yes</span> — AI reasons over source data, cites evidence</td>
+        </tr>
+        <tr>
+          <td><strong>Time series</strong></td>
+          <td>Yes — standardised, summarised</td>
+          <td>Yes — as reported, with full context</td>
+        </tr>
+        <tr>
+          <td><strong>Peer comparison</strong></td>
+          <td><span style="color: var(--red); font-weight: 700;">Manual</span> — export, clean, align yourself</td>
+          <td><span style="color: var(--green); font-weight: 700;">Built-in</span> — contextualised, aligned at source</td>
+        </tr>
+        <tr>
+          <td><strong>Footnotes &amp; context</strong></td>
+          <td><span style="color: var(--red); font-weight: 700;">Lost</span> in standardisation</td>
+          <td><span style="color: var(--green); font-weight: 700;">Preserved</span> and linked to every value</td>
+        </tr>
+        <tr>
+          <td><strong>Data freshness</strong></td>
+          <td><span style="color: var(--red); font-weight: 700;">Annually</span></td>
+          <td><span style="color: var(--green); font-weight: 700;">Quarterly</span> — updated when new data is published</td>
+        </tr>
+        <tr class="bottom-line">
+          <td><strong>How you get answers</strong></td>
+          <td>Search database &rarr; export &rarr; clean &rarr; ask analyst</td>
+          <td style="font-weight: 600;">Ask a question &rarr; get a sourced answer</td>
+        </tr>
+
+        <!-- Cost -->
+        <tr class="section-head"><td colspan="3">Cost</td></tr>
+        <tr>
+          <td><strong>Assets on platform</strong></td>
+          <td>~400 copper properties</td>
+          <td>42 Partner + projected 350+ total *</td>
+        </tr>
+        <tr>
+          <td><strong>Cost per asset</strong></td>
+          <td><span class="cost-val">$212.50</span></td>
+          <td><span class="cost-val">$257</span> Partner · <span style="color: var(--text-secondary);">$28 projected *</span></td>
+        </tr>
+        <tr>
+          <td><strong>Annual cost</strong></td>
+          <td><span class="cost-val">$85,000</span></td>
+          <td><span class="cost-val" style="color: var(--green);">$10,800</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="footnote"><sup>*</sup> Projected figures reflect platform growth assumptions (390+ assets by end of Year 2). As the platform scales, every new dataset is included in your subscription at no extra cost — driving your effective cost per asset down. See Unit Economics (p. 6) for the full ramp schedule.</p>
+
+    <div class="page-footer">
+      <span>Claypond AS — Confidential</span>
+      <span>Page 4</span>
+    </div>
+  </div>
+
+  <!-- ════════════════ 7. PRICING & TERMS ════════════════ -->
+  <div class="page page-break">
+    <div class="page-header">
+      <img class="logo-small" src="assets/img/AR_fox_dark.png" alt="AlfaRev">
+      <span class="page-label">Pricing</span>
+    </div>
+
+    <h2><span class="num">5.</span> Pricing &amp; Terms</h2>
+
+    <div class="pricing-card">
+      <div class="price-label">Annual Subscription — Partner Program</div>
+      <div class="price">USD 10,800</div>
+      <div class="price-unit">12-month commitment · Enterprise license · Unlimited users</div>
+      <div class="price-detail">
+        Includes 42 Partner assets of your choice, 2 monthly ingestions, full platform access, quarterly data updates, monthly Partner calls, and direct support. Option to renew for another 12 months on the same terms.
+      </div>
+    </div>
+
+    <h4>Payment Milestones — Year 1</h4>
+
+    <table class="simple">
+      <thead>
+        <tr>
+          <th>Milestone</th>
+          <th>Trigger</th>
+          <th class="num">Amount</th>
+          <th class="num">%</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Milestone 1</td>
+          <td>Upon contract signature</td>
+          <td class="num">$1,620</td>
+          <td class="num">15%</td>
+        </tr>
+        <tr>
+          <td>Milestone 2</td>
+          <td>MVP official launch (est. June 2026)</td>
+          <td class="num">$9,180</td>
+          <td class="num">85%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="footnote">The subscription officially commences at Milestone 2 (MVP launch). Year 2 renewal, if exercised, is invoiced in full ($10,800) at the start of the second term.</p>
+
+    <div class="payment-timeline">
+      <div class="payment-step">
+        <div class="step-label">Contract Signature</div>
+        <div class="dot"></div>
+        <div class="step-amount">$1,620</div>
+        <div class="step-detail">15% · ~Apr 2026</div>
+      </div>
+      <div class="payment-step">
+        <div class="step-label">MVP Launch</div>
+        <div class="dot large"></div>
+        <div class="step-amount">$9,180</div>
+        <div class="step-detail">85% · June 2026</div>
+      </div>
+      <div class="payment-step">
+        <div class="step-label">Year 2 Renewal</div>
+        <div class="dot alt"></div>
+        <div class="step-amount">$10,800</div>
+        <div class="step-detail">100% · June 2027</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h4>Total Contract Value</h4>
+    <table class="simple">
+      <thead>
+        <tr>
+          <th>Scenario</th>
+          <th class="num">Annual</th>
+          <th class="num">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Year 1 only</td>
+          <td class="num">$10,800</td>
+          <td class="num">$10,800</td>
+        </tr>
+        <tr>
+          <td>Year 1 + Year 2 renewal</td>
+          <td class="num">$10,800</td>
+          <td class="num highlight">$21,600</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="page-footer">
+      <span>Claypond AS — Confidential</span>
+      <span>Page 5</span>
+    </div>
+  </div>
+
+  <!-- ════════════════ 8. UNIT ECONOMICS ════════════════ -->
+  <div class="page page-break">
+    <div class="page-header">
+      <img class="logo-small" src="assets/img/AR_fox_dark.png" alt="AlfaRev">
+      <span class="page-label">Unit Economics</span>
+    </div>
+
+    <h2><span class="num">6.</span> Unit Economics</h2>
+    <p class="lead">
+      Your cost per asset decreases as the platform grows. Partner assets are your contractual deliverables; the projected total reflects our platform growth assumptions.
+    </p>
+
+    <div class="chart-wrapper">
+      <button class="export-btn no-print" onclick="exportChart('scaleVsCost', 'scale-vs-cost')">Export PNG</button>
+      <div class="chart-container tall">
+        <canvas id="scaleVsCost"></canvas>
+      </div>
+    </div>
+
+    <p class="footnote">Partner assets (solid bars) ramp from 20 to 42 during Year 1 and remain at 42 in Year 2. Projected additional assets (light bars) reflect platform growth assumptions. The incumbent benchmark ($212.50/asset) is shown for reference.</p>
+
+    <div class="divider"></div>
+
+    <h4>Key Milestones</h4>
+
+    <table class="simple">
+      <thead>
+        <tr>
+          <th>Milestone</th>
+          <th class="num">Partner</th>
+          <th class="num">$/Asset</th>
+          <th class="num">Projected Total *</th>
+          <th class="num">$/Asset (proj.) *</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Launch <span class="muted">Jun 2026</span></td>
+          <td class="num">20</td>
+          <td class="num">$540</td>
+          <td class="num muted">20</td>
+          <td class="num muted">$540</td>
+        </tr>
+        <tr>
+          <td>6 months <span class="muted">Nov 2026</span></td>
+          <td class="num">30</td>
+          <td class="num">$360</td>
+          <td class="num muted">80</td>
+          <td class="num muted">$135</td>
+        </tr>
+        <tr>
+          <td>12 months <span class="muted">May 2027</span></td>
+          <td class="num">42</td>
+          <td class="num highlight">$257</td>
+          <td class="num muted">152</td>
+          <td class="num muted">$71</td>
+        </tr>
+        <tr>
+          <td>18 months <span class="muted">Nov 2027</span></td>
+          <td class="num">42</td>
+          <td class="num">$257</td>
+          <td class="num muted">272</td>
+          <td class="num muted">$40</td>
+        </tr>
+        <tr>
+          <td>24 months <span class="muted">May 2028</span></td>
+          <td class="num">42</td>
+          <td class="num">$257</td>
+          <td class="num muted">392</td>
+          <td class="num muted">$28</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="footnote"><sup>*</sup> Projected columns reflect platform growth assumptions. Only Partner assets and their $/asset rate are contractual commitments.</p>
+
+    <div class="page-footer">
+      <span>Claypond AS — Confidential</span>
+      <span>Page 6</span>
+    </div>
+  </div>
+
+  <!-- ════════════════ 9. Q&A ════════════════ -->
+  <div class="page page-break qa">
+    <div class="page-header">
+      <img class="logo-small" src="assets/img/AR_fox_dark.png" alt="AlfaRev">
+      <span class="page-label">Q&amp;A</span>
+    </div>
+
+    <h2><span class="num">7.</span> Questions &amp; Answers</h2>
+
+    <h3>Where are you in the product's development?</h3>
+    <p>We have developed the hardest part — the technology for data extraction and classification that produces the Source Value Key. We have started testing AlfaRev AI and are targeting an MVP launch in June 2026. But building the right product requires real-world feedback from professionals who work with this data every day — that's why the Partner Program exists. We need Partner support to get the traction and direction to deliver something that genuinely works for the people who use it.</p>
+
+    <h3>How can I trust the AI's responses?</h3>
+    <p>The AI cites data sources for every reply. Users can choose whether it should only consider data with a Source Value Key or include uncontextualised data. The AI uses AlfaRev's APIs to work exclusively on QC'ed and contextualised data, with full transparency and traceability.</p>
+
+    <h3>Which data types are provided?</h3>
+    <p>Revenue &amp; Costs, Resources &amp; Reserves, and Production (tonnes, grade, recovery). Additional reported data without a Source Value Key is still accessible to the AI but should be used with caution, as it lacks full contextualisation.</p>
+
+    <h3>How far back does the historical data go?</h3>
+    <p>We aim to ingest the full reporting history for each asset. At minimum, we cover 10 years of historical data where available. The depth depends on what the company has published, but partners can request priority on specific time periods.</p>
+
+    <h3>How many sources are ingested per asset?</h3>
+    <p>At minimum, annual reports — but we aim to cover quarterly reports, annual reports, and technical/operational studies. This means not only the number of assets on the platform grows over time, but also the depth of sources per asset.</p>
+
+    <h3>How fast can you add more assets?</h3>
+    <p>Our technology has been tested on mining reports published over the past 15 years. Due to the lack of reporting standards, new datasets require ongoing development — but the Partner Program includes 2 monthly ingestions to continuously expand your coverage.</p>
+
+    <h3>Can I upload my own PDFs and run the extraction myself?</h3>
+    <p>No. The extraction and classification engine is proprietary technology that we operate on our side. Mining reports vary widely in structure, formatting, and conventions — there is no "drop a PDF and get clean data" shortcut. Every new asset goes through our pipeline and is QC'ed before delivery. That QC step is what produces the Source Value Key and ensures the data is trustworthy. What you receive is the finished product: clean, contextualised, traceable data — not a tool you need to operate yourself.</p>
+
+    <h3>Can I compare assets against their peers?</h3>
+    <p>Yes — peer comparison is built in. Because every value is contextualised with its Source Value Key, data across assets is already aligned at source: units, currencies, timescales, and reporting conventions are resolved during extraction. You can compare revenue, reserves, production, grade, or costs across assets — filtered by country, mining method, commodity, or any combination. No manual export, cleaning, or unit conversion required.</p>
+
+    <h3>Can you extract drilling data (collars, intersections, coordinates)?</h3>
+    <p>Drilling results are structured tabular data — collar coordinates, dip/azimuth, end-of-hole depth, and economic intersections. Our extraction engine ingests these tables, and AlfaRev AI can reason over them: query intersections, compare holes, and surface context like geographic reference systems or local grid definitions that are often buried in footnotes.</p>
+    <p>However, drilling data is not part of the standard time-series delivery (Revenue, Reserves, Production). This is exactly where the Partner Program matters: as a Partner, you directly influence if and how new data types like drilling results are formalised into structured, QC'ed deliverables with a Source Value Key. Until then, AlfaRev AI still returns results from ingested drilling tables — just without the full contextualisation of a keyed time series.</p>
+
+    <h3>How realistic is the projected platform growth?</h3>
+    <p>The projected 390+ assets by end of Year 2 is a scenario, not a guarantee. It depends on our ability to onboard new customers and expand commodity coverage. What is guaranteed: your 42 Partner assets and unlimited access to everything else on the platform. If we scale faster, you benefit. If we scale slower, your Partner assets and cost are unaffected.</p>
+
+    <h3>What is AlfaRev's competitive edge?</h3>
+    <p>Greenfield mining data extraction — AI-native with no legacy systems. Full source traceability via the Source Value Key, deterministic extraction (not probabilistic), and deep context that enables AI reasoning at a level not seen before.</p>
+
+    <div class="divider"></div>
+
+    <p class="confidential">This document is confidential and intended solely for the use of Sandfire Resources Limited.</p>
+
+    <div class="page-footer">
+      <span>Claypond AS — Confidential</span>
+      <span>Page 7</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const labels = [
+  'Jun 26','Jul 26','Aug 26','Sep 26','Oct 26','Nov 26','Dec 26',
+  'Jan 27','Feb 27','Mar 27','Apr 27','May 27',
+  'Jun 27','Jul 27','Aug 27','Sep 27','Oct 27','Nov 27','Dec 27',
+  'Jan 28','Feb 28','Mar 28','Apr 28','May 28'
+];
+
+const guaranteedAssets = [20,22,24,26,28,30,32,34,36,38,40,42,42,42,42,42,42,42,42,42,42,42,42,42];
+const totalAssets = [20,32,44,56,68,80,92,104,116,128,140,152,172,192,212,232,252,272,292,312,332,352,372,392];
+const costPerGuaranteed = [540,491,450,415,386,360,338,318,300,284,270,257,257,257,257,257,257,257,257,257,257,257,257,257];
+const costPerTotal = [540,338,245,193,159,135,117,104,93,84,77,71,63,56,51,47,43,40,37,35,33,31,29,28];
+
+const brand = '#6c49b6';
+const brandLight = 'rgba(108, 73, 182, 0.25)';
+const green = '#16a34a';
+const greenLight = 'rgba(22, 163, 74, 0.08)';
+const red = '#dc2626';
+
+// Shared defaults
+Chart.defaults.color = 'hsla(0,0%,2%,0.55)';
+Chart.defaults.borderColor = 'rgba(0,0,0,0.06)';
+Chart.defaults.font.family = "SwedenSans, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
+
+// Chart: Scale vs Unit Cost — stacked bars + lines + benchmark
+new Chart(document.getElementById('scaleVsCost'), {
+  data: {
+    labels,
+    datasets: [
+      {
+        type: 'bar',
+        label: 'Partner Assets',
+        data: guaranteedAssets,
+        backgroundColor: brand,
+        borderRadius: 0,
+        yAxisID: 'y',
+        order: 3,
+        stack: 'assets',
+      },
+      {
+        type: 'bar',
+        label: 'Additional (projected)',
+        data: totalAssets.map((t, i) => t - guaranteedAssets[i]),
+        backgroundColor: brandLight,
+        borderRadius: 3,
+        yAxisID: 'y',
+        order: 2,
+        stack: 'assets',
+      },
+      {
+        type: 'line',
+        label: '$/Asset (partner)',
+        data: costPerGuaranteed,
+        borderColor: brand,
+        borderWidth: 2.5,
+        pointRadius: 0,
+        pointHoverRadius: 4,
+        tension: 0.3,
+        fill: false,
+        yAxisID: 'y1',
+        order: 1,
+      },
+      {
+        type: 'line',
+        label: '$/Asset (projected)',
+        data: costPerTotal,
+        borderColor: green,
+        borderDash: [6, 4],
+        borderWidth: 2,
+        pointRadius: 0,
+        pointHoverRadius: 4,
+        tension: 0.3,
+        fill: false,
+        yAxisID: 'y1',
+        order: 1,
+      },
+      {
+        type: 'line',
+        label: 'Incumbent benchmark ($212.50)',
+        data: Array(24).fill(212.50),
+        borderColor: 'rgba(220, 38, 38, 0.5)',
+        borderWidth: 1.5,
+        borderDash: [8, 4],
+        pointRadius: 0,
+        pointHoverRadius: 0,
+        fill: false,
+        yAxisID: 'y1',
+        order: 0,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { position: 'top', labels: { usePointStyle: true, padding: 12, font: { size: 10 } } },
+      tooltip: {
+        callbacks: {
+          label: ctx => {
+            if (ctx.dataset.type === 'bar') return `${ctx.dataset.label}: ${ctx.raw}`;
+            return `${ctx.dataset.label}: $${ctx.raw}`;
+          },
+          afterBody: (items) => {
+            const idx = items[0].dataIndex;
+            return `\nTotal assets: ${totalAssets[idx]}`;
+          }
+        }
+      }
+    },
+    scales: {
+      y: {
+        position: 'left',
+        stacked: true,
+        title: { display: true, text: 'Assets', color: brand },
+        grid: { display: false },
+      },
+      y1: {
+        position: 'right',
+        title: { display: true, text: '$ / Asset', color: green },
+        grid: { drawOnChartArea: true },
+        ticks: { callback: v => '$' + v },
+      },
+      x: {
+        stacked: true,
+        ticks: { maxRotation: 45, font: { size: 10 } }
+      }
+    }
+  }
+});
+
+// Export chart as PNG
+function exportChart(canvasId, filename) {
+  const canvas = document.getElementById(canvasId);
+  const link = document.createElement('a');
+  link.download = `alfarev-${filename}.png`;
+  link.href = canvas.toDataURL('image/png', 1.0);
+  link.click();
+}
+</script>
+</body>
+</html>
